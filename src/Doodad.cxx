@@ -1,7 +1,7 @@
-#include <Doodad.h>
+#include "Doodad.hxx"
+#include "Common.hxx"
 #include <SDL/SDL_opengl.h>
 #include <SDL/SDL.h>
-#include <Common.h>
 #include <list>
 #include <stdio.h>
 

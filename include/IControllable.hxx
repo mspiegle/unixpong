@@ -1,8 +1,8 @@
 #ifndef _ICONTROLLABLE_H_
 #define _ICONTROLLABLE_H_
 
-#include <ControllerBase.h>
-#include <SDL.h>
+#include "ControllerBase.hxx"
+#include <SDL/SDL.h>
 
 class IControllable {
 	public:

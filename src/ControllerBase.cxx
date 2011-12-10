@@ -1,6 +1,6 @@
-#include <ControllerBase.h>
-#include <GameState.h>
-#include <Common.h>
+#include "ControllerBase.hxx"
+#include "GameState.hxx"
+#include "Common.hxx"
 
 ControllerBase::ControllerBase() {
 }

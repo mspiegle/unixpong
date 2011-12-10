@@ -1,8 +1,8 @@
 #ifndef _BALL_H_
 #define _BALL_H_
 
-#include <Doodad.h>
-#include <IControllable.h>
+#include "Doodad.hxx"
+#include "IControllable.hxx"
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 

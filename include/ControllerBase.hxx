@@ -1,9 +1,9 @@
 #ifndef _CONTROLLERBASE_H_
 #define _CONTROLLERBASE_H_
 
-#include <SDL.h>
-#include <GameState.h>
-#include <Doodad.h>
+#include "GameState.hxx"
+#include "Doodad.hxx"
+#include <SDL/SDL.h>
 
 class ControllerBase {
 	protected:

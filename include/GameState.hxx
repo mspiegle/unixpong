@@ -1,8 +1,8 @@
 #ifndef _GAMESTATE_H_
 #define _GAMESTATE_H_
 
+#include "Doodad.hxx"
 #include <list>
-#include <Doodad.h>
 
 using namespace std;
 

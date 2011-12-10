@@ -1,19 +1,20 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <SDL/SDL.h>
-#include <SDL/SDL_opengl.h>
-#include <Paddle.h>
-#include <Ball.h>
-#include <Timer.h>
-#include <Common.h>
-#include <LocalController.h>
-#include <ComputerController.h>
-#include <GameState.h>
+#include "Common.hxx"
+#include "Paddle.hxx"
+#include "Ball.hxx"
+#include "Timer.hxx"
+#include "LocalController.hxx"
+#include "ComputerController.hxx"
+#include "GameState.hxx"
+#include "Connection.hxx"
 #include <list>
 #include <netdb.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
-#include <Connection.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_opengl.h>
+
 
 bool        opt_RunServer = false;
 bool        opt_RunClient = false;

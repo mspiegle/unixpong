@@ -1,7 +1,7 @@
 #ifndef _NETWORKCONTROLLER_H_
 #define _NETWORKCONTROLLER_H_
 
-#include <ControllerBase.h>
+#include "ControllerBase.hxx"
 
 class NetworkController : public ControllerBase {
 	public:

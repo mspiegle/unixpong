@@ -1,7 +1,7 @@
 #ifndef _COMPUTERCONTROLLER_H_
 #define _COMPUTERCONTROLLER_H_
 
-#include <ControllerBase.h>
+#include "ControllerBase.hxx"
 
 class ComputerController : public ControllerBase {
 	public:

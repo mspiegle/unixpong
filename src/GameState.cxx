@@ -1,4 +1,4 @@
-#include <GameState.h>
+#include "GameState.hxx"
 #include <list>
 
 GameState::GameState() {
@@ -20,7 +20,7 @@ list<int> GameState::getClients() {
 }
 
 void GameState::addPaddle(Doodad* paddle) {
-	this->paddles.push_bach(paddle);
+	this->paddles.push_back(paddle);
 }
 
 void GameState::addBall(Doodad* ball) {

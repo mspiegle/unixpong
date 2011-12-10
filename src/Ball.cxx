@@ -1,7 +1,7 @@
-#include <Ball.h>
+#include "Ball.hxx"
+#include "Common.hxx"
 #include <SDL/SDL_opengl.h>
 #include <SDL/SDL.h>
-#include <Common.h>
 #include <math.h>
 
 Ball::Ball() {

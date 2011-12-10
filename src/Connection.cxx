@@ -1,3 +1,6 @@
+#include "Connection.hxx"
+#include "Common.hxx"
+
 #include <string>
 #include <stdio.h>
 #include <signal.h>
@@ -8,9 +11,6 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-
-#include "Connection.h"
-#include "Common.h"
 
 using namespace std;
 

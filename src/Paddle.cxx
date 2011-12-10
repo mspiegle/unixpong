@@ -1,9 +1,9 @@
-#include <ControllerBase.h>
-#include <IControllable.h>
-#include <Paddle.h>
+#include "Common.hxx"
+#include "ControllerBase.hxx"
+#include "IControllable.hxx"
+#include "Paddle.hxx"
 #include <SDL/SDL_opengl.h>
 #include <SDL/SDL.h>
-#include <Common.h>
 
 Paddle::Paddle() {
 	xPos = 0;

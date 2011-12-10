@@ -1,9 +1,9 @@
-#include <ComputerController.h>
+#include "ComputerController.hxx"
+#include "Common.hxx"
 #include <stdlib.h>
 #include <time.h>
 #include <list>
 #include <stdio.h>
-#include <Common.h>
 #include <math.h>
 
 using namespace std;

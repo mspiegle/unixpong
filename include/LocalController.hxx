@@ -1,8 +1,8 @@
 #ifndef _LOCALCONTROLLER_H_
 #define _LOCALCONTROLLER_H_
 
-#include <ControllerBase.h>
-#include <SDL.h>
+#include "ControllerBase.hxx"
+#include <SDL/SDL.h>
 
 class LocalController : public ControllerBase {
 	private:

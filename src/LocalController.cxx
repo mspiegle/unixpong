@@ -1,5 +1,5 @@
-#include <LocalController.h>
-#include <Common.h>
+#include "LocalController.hxx"
+#include "Common.hxx"
 
 LocalController::LocalController() {
 }

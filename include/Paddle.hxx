@@ -1,9 +1,9 @@
 #ifndef _PADDLE_H_
 #define _PADDLE_H_
 
-#include <Doodad.h>
-#include <IControllable.h>
-#include <ControllerBase.h>
+#include "Doodad.hxx"
+#include "IControllable.hxx"
+#include "ControllerBase.hxx"
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 
