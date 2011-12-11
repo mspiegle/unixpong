@@ -72,8 +72,8 @@ int main(int argc, char** argv) {
 	char* error;
 
 	//check for commandline options
-	if ( 0 != (error = CheckOptions(argc, argv)) || opt_Help ) {
-		if ( !opt_Help ) {
+	if (0 != (error = CheckOptions(argc, argv)) || opt_Help) {
+		if (!opt_Help) {
 			printf("There was an error in your arguments:\n");
 			printf("%s\n", error);		
 		}
@@ -81,32 +81,32 @@ int main(int argc, char** argv) {
 		return EXIT_FAILURE;
 	}
 
-	if ( opt_RunServer ) {
+	if (opt_RunServer) {
 		UdpConnection cxn;
-		if ( !cxn.Socket() ) {
+		if (!cxn.Socket()) {
 			printf("Error building socket\n");
 			return EXIT_FAILURE;
 		}
-		if ( !cxn.Bind(opt_Port) ) {
+		if (!cxn.Bind(opt_Port)) {
 			printf("Error binding port\n");
 			return EXIT_FAILURE;
 		}
 	}
 
-	if ( opt_RunClient ) {
+	if (opt_RunClient) {
 		UdpConnection cxn;
-        if ( !cxn.Socket() ) {
+        if (!cxn.Socket()) {
             printf("Error building socket\n");
             return EXIT_FAILURE;
         }
-		if ( !cxn.Connect(opt_Hostname, opt_Port) ) {
+		if (!cxn.Connect(opt_Hostname, opt_Port)) {
 			printf("Error connecting to server\n");
 			return EXIT_FAILURE;
 		}
 	}
 
 	//SDL/GL Init
-	if ( -1 == SDL_Init( SDL_INIT_EVERYTHING ) ) {
+	if (-1 == SDL_Init(SDL_INIT_EVERYTHING)) {
 		printf("Init() Failure\n");
 		return EXIT_FAILURE;
 	}
@@ -115,21 +115,22 @@ int main(int argc, char** argv) {
 	SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, 5 );
 	SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, 16 );
 	SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
-	if ( NULL == SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_OPENGL ) ) {
+	if (NULL == SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT,
+	                             SCREEN_BPP, SDL_OPENGL)) {
 		printf("SetVideoMode() Failed\n");
 		return EXIT_FAILURE;
 	}
-	glClearColor( 0, 0, 0, 0 );
-	glMatrixMode( GL_PROJECTION );
+	glClearColor(0, 0, 0, 0);
+	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho( 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, -1, 1 ); 
-	glMatrixMode( GL_MODELVIEW );
+	glOrtho(0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, -1, 1); 
+	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	if( GL_NO_ERROR != glGetError() ) {
+	if(GL_NO_ERROR != glGetError()) {
 		printf("OpenGL Error\n");
 		return EXIT_FAILURE;
 	}
-	SDL_WM_SetCaption( "Unix Pong!", NULL );
+	SDL_WM_SetCaption("Unix Pong!", NULL);
 
 	//support stuff
 	Timer fps;
@@ -186,26 +187,33 @@ int main(int argc, char** argv) {
 	while ( isRunning == true ) {
 		fps.Start();
 	
-		while ( SDL_PollEvent(&event) ) {
-			if ( event.type == SDL_QUIT )
+		while (SDL_PollEvent(&event)) {
+			if (event.type == SDL_QUIT)
 				isRunning = false;
 
-			if ( event.key.keysym.sym == SDLK_ESCAPE )
+			if (event.key.keysym.sym == SDLK_ESCAPE)
 				isRunning = false;
 		}
 
-		for( doodadIter = doodads.begin(); doodadIter != doodads.end(); doodadIter++ )
+		for(doodadIter = doodads.begin();
+		    doodadIter != doodads.end();
+		    doodadIter++ ) {
 			(*doodadIter)->Move();
+		}
 
-		glClear( GL_COLOR_BUFFER_BIT );
+		glClear(GL_COLOR_BUFFER_BIT);
 	
-		for( doodadIter = doodads.begin(); doodadIter != doodads.end(); doodadIter++ )
+		for(doodadIter = doodads.begin();
+		    doodadIter != doodads.end();
+		    doodadIter++ ) {
 			(*doodadIter)->Show();
+		}
 
 		SDL_GL_SwapBuffers();
 
-		if ( fps.getTicks() < 1000 / FPS )
+		if (fps.getTicks() < 1000 / FPS) {
 			SDL_Delay( (1000 / FPS) - fps.getTicks() );
+		}
 	}
 
 	delete(human);
@@ -219,3 +227,5 @@ int main(int argc, char** argv) {
 	SDL_Quit();
 	return EXIT_SUCCESS;
 }
+
+// vim: ts=2

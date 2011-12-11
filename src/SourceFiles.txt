@@ -8,6 +8,7 @@ FILE(GLOB unixpong_SRC
 	${unixpong_SOURCE_DIR}/src/LocalController.cxx
 	${unixpong_SOURCE_DIR}/src/Paddle.cxx
 	${unixpong_SOURCE_DIR}/src/Timer.cxx
+	${unixpong_SOURCE_DIR}/src/SDLMain.m
 )
 
 FILE(GLOB unixpong_MAIN

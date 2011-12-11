@@ -9,13 +9,14 @@ INCLUDE_DIRECTORIES(include)
 
 # apple fixes
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-	INCLUDE_DIRECTORIES(/opt/local/include)
-	LINK_DIRECTORIES(/opt/local/lib)
+	INCLUDE_DIRECTORIES(/Library/Frameworks/SDL.framework/Headers)
 	FIND_LIBRARY(COCOA_LIBRARY Cocoa)
+	FIND_LIBRARY(SDL_LIBRARY SDL)
+	FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
 ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 # CFLAGS
-ADD_DEFINITIONS(-DDEBUG -O0 -Wall -g3 -Wextra -Werror -Wfatal-errors)
+ADD_DEFINITIONS(-DDEBUG -O0 -Wall -g3)
 
 # add sources
 INCLUDE(${unixpong_SOURCE_DIR}/src/SourceFiles.txt)
@@ -24,4 +25,9 @@ INCLUDE(${unixpong_SOURCE_DIR}/src/SourceFiles.txt)
 ADD_EXECUTABLE(unixpong ${unixpong_SRC} ${unixpong_MAIN})
 
 # link libs
-TARGET_LINK_LIBRARIES(unixpong GL sdl SDLmain ${COCOA_LIBRARY})
+TARGET_LINK_LIBRARIES(
+	unixpong
+	${COCOA_LIBRARY}
+	${SDL_LIBRARY}
+	${OPENGL_LIBRARY}
+)

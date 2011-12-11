@@ -31,17 +31,17 @@ bool Doodad::ChkCollision(Doodad* doodad) {
 	int TargetBottom = doodad->GetBottomEdge();
 
 	//Lets bounce all the easy non-collision possibilities first
-    if ( SourceBottom < TargetTop )
-        return false;
+	if ( SourceBottom < TargetTop )
+		return false;
 
-    if ( SourceTop > TargetBottom )
-        return false;
+	if ( SourceTop > TargetBottom )
+		return false;
 
-    if ( SourceLeft > TargetRight )
-        return false;
+	if ( SourceLeft > TargetRight )
+		return false;
 
-    if ( SourceRight < TargetLeft )
-        return false;
+	if ( SourceRight < TargetLeft )
+		return false;
 
 	return true;
 }
@@ -125,3 +125,5 @@ void Doodad::DelCollision(Doodad* doodad) {
 bool ChkCollision() {
 	return false;
 }
+
+// vim: ts=2

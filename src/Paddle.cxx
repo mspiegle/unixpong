@@ -31,8 +31,8 @@ void Paddle::RegisterController(ControllerBase* controller) {
 
 void Paddle::Show() {
 	glTranslatef( this->xPos, this->yPos, 0 );
-	
-	glBegin( GL_QUADS );
+
+	glBegin(GL_QUADS);
 		glColor4f( 1.0, 1.0, 1.0, 1.0 );
 		glVertex3f( 0, 0, 0 );
 		glVertex3f( this->wDim, 0, 0 );
@@ -42,3 +42,5 @@ void Paddle::Show() {
 
 	glLoadIdentity();
 }
+
+// vim: ts=2
