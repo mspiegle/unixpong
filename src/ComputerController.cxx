@@ -15,9 +15,9 @@ ComputerController::~ComputerController() {
 }
 
 int ComputerController::GetY() {
-	list<Doodad*> balls = this->info->getBalls();
-	list<Doodad*>::const_iterator iter;
-	Doodad* curDoodad = NULL;
+	list<Widget*> balls = this->info->getBalls();
+	list<Widget*>::const_iterator iter;
+	Widget* curWidget = NULL;
 	int curDist = -1;
 	int dist = 0;
 	int x1 = 0;
@@ -29,28 +29,30 @@ int ComputerController::GetY() {
 	//find closest ball and home in on it
 	for ( iter = balls.begin(); iter != balls.end(); iter++ ) {
 		x2 = (*iter)->GetPositionX();
-		x1 = this->doodad->GetPositionX();
+		x1 = this->widget->GetPositionX();
 		y2 = (*iter)->GetPositionY();
-		y1 = this->doodad->GetPositionY();
+		y1 = this->widget->GetPositionY();
 		dist = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 
 		if ( curDist == -1 ) {
 			curDist = dist;
-			curDoodad = (*iter);
+			curWidget = (*iter);
 		} else {
 			if ( dist < curDist ) {
 				curDist = dist;
-				curDoodad = (*iter);
+				curWidget = (*iter);
 			}
 		}
 	}
 
-	y = curDoodad->GetPositionY();
+	y = curWidget->GetPositionY();
 
-	if( (y - this->doodad->GetDimensionH() / 2) < 0 )
+	if( (y - this->widget->GetDimensionH() / 2) < 0 )
 		y = 0;
 	else
-		y = y - this->doodad->GetDimensionH() / 2;
+		y = y - this->widget->GetDimensionH() / 2;
 
 	return y;
 }
+
+// vim: ts=2

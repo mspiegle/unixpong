@@ -5,41 +5,41 @@
 #include <math.h>
 
 Ball::Ball() {
-	this->xPos = 0;
-	this->yPos = 0;
-	this->xVel = 0;
-	this->yVel = 0;
-	this->wDim = 20;
-	this->hDim = 20;
+	this->pos_x = 0;
+	this->pos_y = 0;
+	this->vel_x = 0;
+	this->vel_y = 0;
+	this->dim_w = 20;
+	this->dim_h = 20;
 }
 
 Ball::~Ball() {
 }
 
 void Ball::Move() {
-    list<Doodad*>::const_iterator iter;
-    for( iter = colliders.begin(); iter != colliders.end(); iter++ ) {
-        if( ChkCollision(*iter) ) {
-			//change ball direction
-            this->xVel *= -1;
-			//calculate "spin"
-			int center = ((*iter)->GetPositionY() + ((*iter)->GetDimensionH() / 2));
-			if ( this->yPos > center )
-				this->yVel = abs(this->yVel);
-			else
-				this->yVel = abs(this->yVel) * -1;
-        }
-    }
+	list<Widget*>::const_iterator iter;
+for( iter = colliders.begin(); iter != colliders.end(); iter++ ) {
+if( ChkCollision(*iter) ) {
+//change ball direction
+this->xVel *= -1;
+//calculate "spin"
+int center = ((*iter)->GetPositionY() + ((*iter)->GetDimensionH() / 2));
+if ( this->yPos > center )
+this->yVel = abs(this->yVel);
+else
+this->yVel = abs(this->yVel) * -1;
+}
+}
 
-    this->xPos += this->xVel;
+this->xPos += this->xVel;
 
-    if ( ( this->xPos < 0 ) || ( this->xPos + this->wDim > SCREEN_WIDTH ) )
-        this->xPos -= this->xVel;
+if ( ( this->xPos < 0 ) || ( this->xPos + this->wDim > SCREEN_WIDTH ) )
+this->xPos -= this->xVel;
 
-    this->yPos += this->yVel;
+this->yPos += this->yVel;
 
-    if ( ( this->yPos < 0 ) || ( this->yPos + this->hDim > SCREEN_HEIGHT ) )
-        this->yPos -= this->yVel;
+if ( ( this->yPos < 0 ) || ( this->yPos + this->hDim > SCREEN_HEIGHT ) )
+this->yPos -= this->yVel;
 }
 
 int Ball::GetTopEdge() {
@@ -71,3 +71,4 @@ void Ball::Show() {
 	glEnd();
 	glLoadIdentity();
 }
+// vim: ts=2 sw=1

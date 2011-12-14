@@ -1,30 +1,29 @@
 #ifndef _GAMESTATE_H_
 #define _GAMESTATE_H_
 
-#include "Doodad.hxx"
+#include "Widget.hxx"
 #include <list>
 
 using namespace std;
 
-//class Doodad;
-
 class GameState {
 	private:
-		list<Doodad*> paddles;
-		list<Doodad*> balls;
+		list<Widget*> paddles;
+		list<Widget*> balls;
 		list<int> clients;
 
 	public:
 		GameState();
 		~GameState();
 
-		list<Doodad*> getPaddles();
-		list<Doodad*> getBalls();
+		list<Widget*> getPaddles();
+		list<Widget*> getBalls();
 		list<int> getClients();
 
-		void addPaddle(Doodad* paddle);
-		void addBall(Doodad* ball);
+		void addPaddle(Widget* paddle);
+		void addBall(Widget* ball);
 		void addClient(int client);
 };
 
 #endif
+// vim: ts=2

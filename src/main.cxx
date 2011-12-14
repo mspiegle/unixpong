@@ -20,11 +20,11 @@ bool        opt_RunServer = false;
 bool        opt_RunClient = false;
 bool        opt_Help      = false;
 char const* opt_Hostname  = "0.0.0.0";
-int         opt_Port      = 50525;
+int         opt_Port      = 52525;
 char const* Options       = "hsc:p:";
 char const* HelpText      = "Usage: %s [-s] | [-c hostname] [-p port]\n";
 
-char *CheckOptions(int argc, char** argv) {
+char* CheckOptions(int argc, char** argv) {
 	int o;
 	char* error;
 	struct hostent* he;
@@ -110,11 +110,11 @@ int main(int argc, char** argv) {
 		printf("Init() Failure\n");
 		return EXIT_FAILURE;
 	}
-	SDL_GL_SetAttribute( SDL_GL_RED_SIZE, 5 );
-	SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, 5 );
-	SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, 5 );
-	SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, 16 );
-	SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
+	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 5);
+	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 5);
+	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 5);
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	if (NULL == SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT,
 	                             SCREEN_BPP, SDL_OPENGL)) {
 		printf("SetVideoMode() Failed\n");
@@ -136,86 +136,94 @@ int main(int argc, char** argv) {
 	Timer fps;
 	SDL_Event event;
 	bool isRunning = true;
-	list<Doodad *> doodads;
-	list<Doodad *>::const_iterator doodadIter;
+	list<Widget *> Widgets;
+	list<Widget *>::const_iterator WidgetIter;
 
 	//paddle-specific stuff
 	Paddle *leftPaddle = new Paddle();
 	leftPaddle->SetPositionX(10);
 	leftPaddle->SetPositionY(50);
-	doodads.push_back(leftPaddle);
+	Widgets.push_back(leftPaddle);
 	Paddle *rightPaddle = new Paddle();
 	rightPaddle->SetPositionX(SCREEN_WIDTH - (10 + rightPaddle->GetDimensionW()));
 	rightPaddle->SetPositionY(50);
-	doodads.push_back(rightPaddle);
+	Widgets.push_back(rightPaddle);
 
 	//ball-specific stuff
-	Ball *ball1 = new Ball();
+	Ball* ball1 = new Ball();
 	ball1->SetPositionX(SCREEN_WIDTH / 2);
 	ball1->SetPositionY(SCREEN_HEIGHT / 2);
 	ball1->SetVelocityX(-10);
 	ball1->SetVelocityY(1);
 	ball1->AddCollision(leftPaddle);
 	ball1->AddCollision(rightPaddle);
-	Ball *ball2 = new Ball();
+	Ball* ball2 = new Ball();
 	ball2->SetPositionX(SCREEN_WIDTH / 2);
 	ball2->SetPositionY(SCREEN_HEIGHT / 2);
 	ball2->SetVelocityX(4);
 	ball2->SetVelocityY(-1);
 	ball2->AddCollision(leftPaddle);
 	ball2->AddCollision(rightPaddle);
-	doodads.push_back(ball1);
-	doodads.push_back(ball2);
+	Widgets.push_back(ball1);
+	Widgets.push_back(ball2);
 	
 	//game state object
-	GameState *info = new GameState();
+	GameState* info = new GameState();
 	info->addPaddle(leftPaddle);
 	info->addPaddle(rightPaddle);
 	info->addBall(ball1);
 	info->addBall(ball2);
 
 	//controllers
-	LocalController *human = new LocalController();
+	LocalController* human = new LocalController();
 	human->RegisterGameState(info);
-	human->RegisterDoodad(rightPaddle);
+	human->RegisterWidget(rightPaddle);
 	rightPaddle->RegisterController(human);
-	ComputerController *computer = new ComputerController();
+	ComputerController* computer = new ComputerController();
 	computer->RegisterGameState(info);
-	computer->RegisterDoodad(leftPaddle);
+	computer->RegisterWidget(leftPaddle);
 	leftPaddle->RegisterController(computer);
 
 	while ( isRunning == true ) {
 		fps.Start();
 	
 		while (SDL_PollEvent(&event)) {
-			if (event.type == SDL_QUIT)
+			// did they try to exit the game
+			if (event.type == SDL_QUIT) {
 				isRunning = false;
+			}
 
-			if (event.key.keysym.sym == SDLK_ESCAPE)
+			// did they push escape?
+			if (event.key.keysym.sym == SDLK_ESCAPE) {
 				isRunning = false;
+			}
 		}
 
-		for(doodadIter = doodads.begin();
-		    doodadIter != doodads.end();
-		    doodadIter++ ) {
-			(*doodadIter)->Move();
+		// prepare the widget into a new location
+		for(WidgetIter = Widgets.begin();
+		    WidgetIter != Widgets.end();
+		    WidgetIter++ ) {
+			(*WidgetIter)->Move();
 		}
 
 		glClear(GL_COLOR_BUFFER_BIT);
-	
-		for(doodadIter = doodads.begin();
-		    doodadIter != doodads.end();
-		    doodadIter++ ) {
-			(*doodadIter)->Show();
+
+		// actually show the widget in the new location	
+		for(WidgetIter = Widgets.begin();
+		    WidgetIter != Widgets.end();
+		    WidgetIter++ ) {
+			(*WidgetIter)->Show();
 		}
 
 		SDL_GL_SwapBuffers();
 
+		// introduce enough delay to achieve ## FPS
 		if (fps.getTicks() < 1000 / FPS) {
 			SDL_Delay( (1000 / FPS) - fps.getTicks() );
 		}
 	}
 
+	// cleanup
 	delete(human);
 	delete(computer);
 	delete(leftPaddle);

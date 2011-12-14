@@ -3,7 +3,7 @@ FILE(GLOB unixpong_SRC
 	${unixpong_SOURCE_DIR}/src/ComputerController.cxx
 	${unixpong_SOURCE_DIR}/src/Connection.cxx
 	${unixpong_SOURCE_DIR}/src/ControllerBase.cxx
-	${unixpong_SOURCE_DIR}/src/Doodad.cxx
+	${unixpong_SOURCE_DIR}/src/Widget.cxx
 	${unixpong_SOURCE_DIR}/src/GameState.cxx
 	${unixpong_SOURCE_DIR}/src/LocalController.cxx
 	${unixpong_SOURCE_DIR}/src/Paddle.cxx

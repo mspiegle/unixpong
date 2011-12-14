@@ -2,13 +2,13 @@
 #define _CONTROLLERBASE_H_
 
 #include "GameState.hxx"
-#include "Doodad.hxx"
+#include "Widget.hxx"
 #include <SDL/SDL.h>
 
 class ControllerBase {
 	protected:
 		GameState* info;
-		Doodad* doodad;
+		Widget* widget;
 
 	public:
 		ControllerBase();
@@ -18,7 +18,7 @@ class ControllerBase {
 		virtual int GetY();
 
 		void RegisterGameState(GameState* info);
-		void RegisterDoodad(Doodad* doodad);
+		void RegisterWidget(Widget* Widget);
 };
 
 #endif

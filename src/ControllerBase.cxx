@@ -20,6 +20,7 @@ void ControllerBase::RegisterGameState(GameState* info) {
 	this->info = info;
 }
 
-void ControllerBase::RegisterDoodad(Doodad* doodad) {
-	this->doodad = doodad;
+void ControllerBase::RegisterWidget(Widget* widget) {
+	this->widget = widget;
 }
+// vim: ts=2

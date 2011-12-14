@@ -7,11 +7,11 @@ GameState::GameState() {
 GameState::~GameState() {
 }
 
-list<Doodad*> GameState::getPaddles() {
+list<Widget*> GameState::getPaddles() {
 	return this->paddles;
 }
 
-list<Doodad*> GameState::getBalls() {
+list<Widget*> GameState::getBalls() {
 	return this->balls;
 }
 
@@ -19,11 +19,11 @@ list<int> GameState::getClients() {
 	return this->clients;
 }
 
-void GameState::addPaddle(Doodad* paddle) {
+void GameState::addPaddle(Widget* paddle) {
 	this->paddles.push_back(paddle);
 }
 
-void GameState::addBall(Doodad* ball) {
+void GameState::addBall(Widget* ball) {
 	this->balls.push_back(ball);
 }
 

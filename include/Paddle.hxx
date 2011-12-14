@@ -1,13 +1,13 @@
 #ifndef _PADDLE_H_
 #define _PADDLE_H_
 
-#include "Doodad.hxx"
+#include "Widget.hxx"
 #include "IControllable.hxx"
 #include "ControllerBase.hxx"
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 
-class Paddle : public Doodad, public IControllable {
+class Paddle : public Widget, public IControllable {
 	private:
 		ControllerBase* controller;
 
