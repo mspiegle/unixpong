@@ -2,6 +2,7 @@
 #include "Common.hxx"
 
 #include <string>
+#include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
 #include <unistd.h>

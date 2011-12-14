@@ -8,8 +8,11 @@ FILE(GLOB unixpong_SRC
 	${unixpong_SOURCE_DIR}/src/LocalController.cxx
 	${unixpong_SOURCE_DIR}/src/Paddle.cxx
 	${unixpong_SOURCE_DIR}/src/Timer.cxx
-	${unixpong_SOURCE_DIR}/src/SDLMain.m
 )
+
+IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+	SET(unixpong_SRC ${unixpong_SRC} ${unixpong_SOURCE_DIR}/src/SDLMain.m)
+ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 FILE(GLOB unixpong_MAIN
 	${unixpong_SOURCE_DIR}/src/main.cxx
