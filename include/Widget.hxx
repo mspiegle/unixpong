@@ -8,9 +8,9 @@ using namespace std;
 
 class Widget {
 	protected:
-		int xPos, yPos;
-		int xVel, yVel;
-		int wDim, hDim;
+		int pos_x, pos_y;
+		int vel_x, vel_y;
+		int dim_w, dim_h;
 		list<Widget*> colliders;
 		bool ChkCollision(Widget*);
 
