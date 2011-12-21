@@ -11,7 +11,7 @@ class Ball : public Widget {
 		Ball();
 		~Ball();
 
-		void Show();
+		void Draw();
 		void Move();
 		int GetLeftEdge();
 		int GetRightEdge();

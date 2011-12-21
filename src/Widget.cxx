@@ -19,53 +19,20 @@ Widget::Widget() {
 Widget::~Widget() {
 }
 
-bool Widget::ChkCollision(Widget* Widget) {
-	int SourceLeft   = this->GetLeftEdge();
-	int SourceRight  = this->GetRightEdge();
-	int SourceTop    = this->GetTopEdge();
-	int SourceBottom = this->GetBottomEdge();
-
-	int TargetLeft   = Widget->GetLeftEdge();
-	int TargetRight  = Widget->GetRightEdge();
-	int TargetTop    = Widget->GetTopEdge();
-	int TargetBottom = Widget->GetBottomEdge();
-
-	//Lets bounce all the easy non-collision possibilities first
-	if ( SourceBottom < TargetTop )
-		return false;
-
-	if ( SourceTop > TargetBottom )
-		return false;
-
-	if ( SourceLeft > TargetRight )
-		return false;
-
-	if ( SourceRight < TargetLeft )
-		return false;
-
-	return true;
-}
-
-int Widget::GetPositionX() {
-	return this->pos_x;
-}
-
-int Widget::GetPositionY() {
-	return this->pos_y;
-}
-
 void Widget::Move() {
-	HandleInput();
-
+	//TODO: this could be way more advanced
+	//take the current velocity, and add it to the positions
 	this->pos_x += this->vel_x;
 
-	if ( ( this->pos_x < 0 ) || ( this->pos_x + this->dim_w > SCREEN_WIDTH ) )
+	if ((this->pos_x < 0) || (this->pos_x + this->dim_w > SCREEN_WIDTH)) {
 		this->pos_x -= this->vel_x;
+	}
 
 	this->pos_y += this->vel_y;
 
-	if ( ( this->pos_y < 0 ) || ( this->pos_y + this->dim_h > SCREEN_HEIGHT ) )
+	if ((this->pos_y < 0) || (this->pos_y + this->dim_h > SCREEN_HEIGHT)) {
 		this->pos_y -= this->vel_y;
+	}
 }
 
 int Widget::GetTopEdge() {
@@ -87,7 +54,7 @@ int Widget::GetBottomEdge() {
 void Widget::HandleInput() {
 }
 
-void Widget::Show() {
+void Widget::Draw() {
 }
 
 void Widget::SetPositionX(int x) {
@@ -106,6 +73,30 @@ void Widget::SetVelocityY(int y) {
 	this->vel_y = y;
 }
 
+int Widget::GetPositionX() {
+	return this->pos_x;
+}
+
+int Widget::GetPositionY() {
+	return this->pos_y;
+}
+
+int Widget::GetVelocityX() {
+	return this->pos_x;
+}
+
+int Widget::GetVelocityY() {
+	return this->pos_y;
+}
+
+void Widget::SetDimensionW(int w) {
+	this->dim_w = w;
+}
+
+void Widget::SetDimensionH(int h) {
+	this->dim_h = h;
+}
+
 int Widget::GetDimensionW() {
 	return this->dim_w;
 }
@@ -114,16 +105,39 @@ int Widget::GetDimensionH() {
 	return this->dim_h;
 }
 
-void Widget::AddCollision(Widget* Widget) {
-	colliders.push_back(Widget);
+void Widget::AddNeighbor(Widget* Widget) {
+	neighbors.push_back(Widget);
 }
 
-void Widget::DelCollision(Widget* Widget) {
-	colliders.remove(Widget);
+void Widget::DelNeighbor(Widget* Widget) {
+	neighbors.remove(Widget);
 }
 
-bool ChkCollision() {
-	return false;
+bool Widget::HitNeighbor(Widget* Widget) {
+	//TODO: More advanced collision detection based on SAT
+	//Lets bounce all the easy non-collision possibilities first
+	if (this->GetBottomEdge() < Widget->GetTopEdge()) {
+		return false;
+	}
+
+	if (this->GetTopEdge() > Widget->GetBottomEdge()) {
+		return false;
+	}
+
+	if (this->GetLeftEdge() > Widget->GetRightEdge()) {
+		return false;
+	}
+
+	if (this->GetRightEdge() < Widget->GetLeftEdge()) {
+		return false;
+	}
+
+	return true;
 }
+
+list<Widget*> Widget::GetNeighbors() {
+	return this->neighbors;
+}
+
 
 // vim: ts=2

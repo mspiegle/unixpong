@@ -15,7 +15,7 @@ class Paddle : public Widget, public IControllable {
 		Paddle();
 		~Paddle();
 
-		void Show();
+		void Draw();
 
 		//IControllable Interface
 		void HandleInput();
