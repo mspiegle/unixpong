@@ -8,12 +8,12 @@
 using namespace std;
 
 Widget::Widget() {
-	this->xPos = 0;
-	this->yPos = 0;
-	this->xVel = 0;
-	this->yVel = 0;
-	this->wDim = 0;
-	this->hDim = 0;
+	this->pos_x = 0;
+	this->pos_y = 0;
+	this->vel_x = 0;
+	this->vel_y = 0;
+	this->dim_w = 0;
+	this->dim_h = 0;
 }
 
 Widget::~Widget() {
@@ -47,41 +47,41 @@ bool Widget::ChkCollision(Widget* Widget) {
 }
 
 int Widget::GetPositionX() {
-	return this->xPos;
+	return this->pos_x;
 }
 
 int Widget::GetPositionY() {
-	return this->yPos;
+	return this->pos_y;
 }
 
 void Widget::Move() {
 	HandleInput();
 
-	this->xPos += this->xVel;
+	this->pos_x += this->vel_x;
 
-	if ( ( this->xPos < 0 ) || ( this->xPos + this->wDim > SCREEN_WIDTH ) )
-		this->xPos -= this->xVel;
+	if ( ( this->pos_x < 0 ) || ( this->pos_x + this->dim_w > SCREEN_WIDTH ) )
+		this->pos_x -= this->vel_x;
 
-	this->yPos += this->yVel;
+	this->pos_y += this->vel_y;
 
-	if ( ( this->yPos < 0 ) || ( this->yPos + this->hDim > SCREEN_HEIGHT ) )
-		this->yPos -= this->yVel;
+	if ( ( this->pos_y < 0 ) || ( this->pos_y + this->dim_h > SCREEN_HEIGHT ) )
+		this->pos_y -= this->vel_y;
 }
 
 int Widget::GetTopEdge() {
-	return this->yPos;
+	return this->pos_y;
 }
 
 int Widget::GetRightEdge() {
-	return this->xPos + this->wDim;
+	return this->pos_x + this->dim_w;
 }
 
 int Widget::GetLeftEdge() {
-	return this->xPos;
+	return this->pos_x;
 }
 
 int Widget::GetBottomEdge() {
-	return this->yPos + this->hDim;
+	return this->pos_y + this->dim_h;
 }
 
 void Widget::HandleInput() {
@@ -91,27 +91,27 @@ void Widget::Show() {
 }
 
 void Widget::SetPositionX(int x) {
-	this->xPos = x;
+	this->pos_x = x;
 }
 
 void Widget::SetPositionY(int y) {
-	this->yPos = y;
+	this->pos_y = y;
 }
 
 void Widget::SetVelocityX(int x) {
-	this->xVel = x;
+	this->vel_x = x;
 }
 
 void Widget::SetVelocityY(int y) {
-	this->yVel = y;
+	this->vel_y = y;
 }
 
 int Widget::GetDimensionW() {
-	return this->wDim;
+	return this->dim_w;
 }
 
 int Widget::GetDimensionH() {
-	return this->hDim;
+	return this->dim_h;
 }
 
 void Widget::AddCollision(Widget* Widget) {

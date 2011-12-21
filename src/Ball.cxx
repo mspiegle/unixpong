@@ -5,12 +5,12 @@
 #include <math.h>
 
 Ball::Ball() {
-	this->pos_x = 0;
-	this->pos_y = 0;
-	this->vel_x = 0;
-	this->vel_y = 0;
-	this->dim_w = 20;
-	this->dim_h = 20;
+	this->SetPositionX(0);
+	this->SetPositionY(0);
+	this->SetVelocityX(0);
+	this->SetVelocityY(0);
+	this->SetDimensionW(20);
+	this->SetDimensionH(20);
 }
 
 Ball::~Ball() {
@@ -18,28 +18,32 @@ Ball::~Ball() {
 
 void Ball::Move() {
 	list<Widget*>::const_iterator iter;
-for( iter = colliders.begin(); iter != colliders.end(); iter++ ) {
-if( ChkCollision(*iter) ) {
-//change ball direction
-this->xVel *= -1;
-//calculate "spin"
-int center = ((*iter)->GetPositionY() + ((*iter)->GetDimensionH() / 2));
-if ( this->yPos > center )
-this->yVel = abs(this->yVel);
-else
-this->yVel = abs(this->yVel) * -1;
-}
-}
+	for(iter = colliders.begin(); iter != colliders.end(); iter++) {
+		if(ChkCollision(*iter)) {
+			//change ball direction
+			SetVelocityX(GetVelocityX() * -1);
 
-this->xPos += this->xVel;
+			//calculate "spin"
+			int center = ((*iter)->GetPositionY() + ((*iter)->GetDimensionH() / 2));
+			if (this->GetPositionY() > center) {
+				SetVelocityY(abs(GetVelocityY()));
+			} else {
+				SetVelocityY(abs(GetVelocityY()) * -1);
+			}
+		}
+	}
 
-if ( ( this->xPos < 0 ) || ( this->xPos + this->wDim > SCREEN_WIDTH ) )
-this->xPos -= this->xVel;
+	SetPositionX(GetPositionX() + GetVelocityX());
 
-this->yPos += this->yVel;
+	if ((GetPositionX() < 0) || (GetPositionX() + GetDimensionW() > SCREEN_WIDTH)) {
+		this->xPos -= this->xVel;
+	}
 
-if ( ( this->yPos < 0 ) || ( this->yPos + this->hDim > SCREEN_HEIGHT ) )
-this->yPos -= this->yVel;
+	this->yPos += this->yVel;
+
+	if (( this->yPos < 0) || (this->yPos + this->hDim > SCREEN_HEIGHT)) {
+		this->yPos -= this->yVel;
+	}
 }
 
 int Ball::GetTopEdge() {
@@ -71,4 +75,4 @@ void Ball::Show() {
 	glEnd();
 	glLoadIdentity();
 }
-// vim: ts=2 sw=1
+// vim: ts=2
