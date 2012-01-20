@@ -157,6 +157,7 @@ int main(int argc, char** argv) {
 	ball1->SetVelocityY(1);
 	ball1->AddNeighbor(leftPaddle);
 	ball1->AddNeighbor(rightPaddle);
+	/*
 	Ball* ball2 = new Ball();
 	ball2->SetPositionX(SCREEN_WIDTH / 2);
 	ball2->SetPositionY(SCREEN_HEIGHT / 2);
@@ -164,15 +165,16 @@ int main(int argc, char** argv) {
 	ball2->SetVelocityY(-1);
 	ball2->AddNeighbor(leftPaddle);
 	ball2->AddNeighbor(rightPaddle);
+	*/
 	Widgets.push_back(ball1);
-	Widgets.push_back(ball2);
+	//Widgets.push_back(ball2);
 	
 	//game state object
 	GameState* info = new GameState();
 	info->addPaddle(leftPaddle);
 	info->addPaddle(rightPaddle);
 	info->addBall(ball1);
-	info->addBall(ball2);
+	//info->addBall(ball2);
 
 	//controllers
 	LocalController* human = new LocalController();
@@ -229,7 +231,7 @@ int main(int argc, char** argv) {
 	delete(leftPaddle);
 	delete(rightPaddle);
 	delete(ball1);
-	delete(ball2);
+	//delete(ball2);
 	delete(info);
 
 	SDL_Quit();
