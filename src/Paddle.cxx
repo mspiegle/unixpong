@@ -29,7 +29,7 @@ void Paddle::RegisterController(ControllerBase* controller) {
 	this->controller = controller;
 }
 
-void Paddle::Show() {
+void Paddle::Draw() {
 	glTranslatef(GetPositionX(), GetPositionY(), 0);
 
 	glBegin(GL_QUADS);

@@ -5,21 +5,24 @@
 #include <math.h>
 
 Ball::Ball() {
-	this->SetPositionX(0);
-	this->SetPositionY(0);
-	this->SetVelocityX(0);
-	this->SetVelocityY(0);
-	this->SetDimensionW(20);
-	this->SetDimensionH(20);
+	SetPositionX(0);
+	SetPositionY(0);
+	SetVelocityX(0);
+	SetVelocityY(0);
+	SetDimensionW(20);
+	SetDimensionH(20);
 }
 
 Ball::~Ball() {
 }
 
+void Ball::HandleInput() {
+}
+
 void Ball::Move() {
 	list<Widget*>::const_iterator iter;
-	for(iter = colliders.begin(); iter != colliders.end(); iter++) {
-		if(ChkCollision(*iter)) {
+	for(iter = GetNeighbors().begin(); iter != GetNeighbors().end(); iter++) {
+		if(HitNeighbor(*iter)) {
 			//change ball direction
 			SetVelocityX(GetVelocityX() * -1);
 
@@ -35,15 +38,15 @@ void Ball::Move() {
 
 	SetPositionX(GetPositionX() + GetVelocityX());
 
-	if ((GetPositionX() < 0) || 
-	    (GetPositionX() + GetDimensionW() > SCREEN_WIDTH)) {
+	if ((GetPositionX() < 0)
+	    || (GetPositionX() + GetDimensionW() > SCREEN_WIDTH)) {
 		SetPositionX(GetPositionX() - GetVelocityX());
 	}
 
-	SetPositionY(GetPositionY() + GetVelocityY());
+	SetPositionY(GetPositionY() - GetVelocityY());
 
-	if ((GetPositionY() < 0) ||
-	    (GetPositionY() + GetDimensionH() > SCREEN_HEIGHT)) {
+	if ((GetPositionY() < 0)
+	    || (GetPositionY() + GetDimensionH() > SCREEN_HEIGHT)) {
 		SetPositionY(GetPositionY() - GetVelocityY());
 	}
 }
@@ -64,16 +67,16 @@ int Ball::GetLeftEdge() {
 	return GetPositionX() - (GetDimensionW() / 2);
 }
 
-void Ball::Show() {
-	glTranslatef(GetPositionX(), GetPositionY(), 0 );
+void Ball::Draw() {
+	glTranslatef(GetPositionX(), GetPositionY(), 0);
 
 	int temp;
-	const float DEG2RAD = 3.14159 / 180;
 	glBegin (GL_LINE_LOOP);
-		for ( temp = 0; temp < 360; temp++ ) {
-			float degInRad = temp * DEG2RAD;
-			glVertex2f(cos(degInRad) * (GetDimensionW() / 2),
-			           sin(degInRad) * (GetDimensionH() / 2));
+		for (temp = 0; temp < 360; temp++) {
+			//convert degrees to radians
+			float deg_in_rad = temp * (3.14159 / 180);
+			glVertex2f(cos(deg_in_rad) * (GetDimensionW() / 2),
+			           sin(deg_in_rad) * (GetDimensionH() / 2));
 		}
 	glEnd();
 	glLoadIdentity();

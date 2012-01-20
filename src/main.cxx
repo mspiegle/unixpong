@@ -155,15 +155,15 @@ int main(int argc, char** argv) {
 	ball1->SetPositionY(SCREEN_HEIGHT / 2);
 	ball1->SetVelocityX(-10);
 	ball1->SetVelocityY(1);
-	ball1->AddCollision(leftPaddle);
-	ball1->AddCollision(rightPaddle);
+	ball1->AddNeighbor(leftPaddle);
+	ball1->AddNeighbor(rightPaddle);
 	Ball* ball2 = new Ball();
 	ball2->SetPositionX(SCREEN_WIDTH / 2);
 	ball2->SetPositionY(SCREEN_HEIGHT / 2);
 	ball2->SetVelocityX(4);
 	ball2->SetVelocityY(-1);
-	ball2->AddCollision(leftPaddle);
-	ball2->AddCollision(rightPaddle);
+	ball2->AddNeighbor(leftPaddle);
+	ball2->AddNeighbor(rightPaddle);
 	Widgets.push_back(ball1);
 	Widgets.push_back(ball2);
 	
@@ -212,7 +212,7 @@ int main(int argc, char** argv) {
 		for(WidgetIter = Widgets.begin();
 		    WidgetIter != Widgets.end();
 		    WidgetIter++ ) {
-			(*WidgetIter)->Show();
+			(*WidgetIter)->Draw();
 		}
 
 		SDL_GL_SwapBuffers();

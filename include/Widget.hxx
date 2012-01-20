@@ -11,16 +11,15 @@ class Widget {
 		int pos_x, pos_y;
 		int vel_x, vel_y;
 		int dim_w, dim_h;
-		list<Widget*> colliders;
-		bool ChkCollision(Widget*);
+		list<Widget*> neighbors;
+		virtual void HandleInput() = 0;
 
 	public:
 		Widget();
 		~Widget();
 
 		virtual void Move();
-		virtual void Show();
-		virtual void HandleInput();
+		virtual void Draw();
 	
 		virtual int GetRightEdge();
 		virtual int GetLeftEdge();
@@ -41,8 +40,10 @@ class Widget {
 		int GetDimensionW();
 		int GetDimensionH();
 
-		void AddCollision(Widget*);
-		void DelCollision(Widget*);
+		void AddNeighbor(Widget*);
+		void DelNeighbor(Widget*);
+		bool HitNeighbor(Widget*);
+		list<Widget*> GetNeighbors();
 };
 
 #endif
