@@ -35,42 +35,45 @@ void Ball::Move() {
 
 	SetPositionX(GetPositionX() + GetVelocityX());
 
-	if ((GetPositionX() < 0) || (GetPositionX() + GetDimensionW() > SCREEN_WIDTH)) {
-		this->xPos -= this->xVel;
+	if ((GetPositionX() < 0) || 
+	    (GetPositionX() + GetDimensionW() > SCREEN_WIDTH)) {
+		SetPositionX(GetPositionX() - GetVelocityX());
 	}
 
-	this->yPos += this->yVel;
+	SetPositionY(GetPositionY() + GetVelocityY());
 
-	if (( this->yPos < 0) || (this->yPos + this->hDim > SCREEN_HEIGHT)) {
-		this->yPos -= this->yVel;
+	if ((GetPositionY() < 0) ||
+	    (GetPositionY() + GetDimensionH() > SCREEN_HEIGHT)) {
+		SetPositionY(GetPositionY() - GetVelocityY());
 	}
 }
 
 int Ball::GetTopEdge() {
-	return this->yPos - (this->hDim / 2);
+	return GetPositionY() - (GetDimensionH() / 2);
 }
 
 int Ball::GetRightEdge() {
-	return this->xPos + (this->wDim / 2);
+	return GetPositionX() + (GetDimensionW() / 2);
 }
 
 int Ball::GetBottomEdge() {
-	return this->yPos + (this->hDim / 2);
+	return GetPositionY() + (GetDimensionH() / 2);
 }
 
 int Ball::GetLeftEdge() {
-	return this->xPos - (this->wDim / 2);
+	return GetPositionX() - (GetDimensionW() / 2);
 }
 
 void Ball::Show() {
-	glTranslatef( this->xPos, this->yPos, 0 );
+	glTranslatef(GetPositionX(), GetPositionY(), 0 );
 
 	int temp;
 	const float DEG2RAD = 3.14159 / 180;
-	glBegin ( GL_LINE_LOOP );
+	glBegin (GL_LINE_LOOP);
 		for ( temp = 0; temp < 360; temp++ ) {
 			float degInRad = temp * DEG2RAD;
-			glVertex2f( cos(degInRad) * (this->wDim / 2), sin(degInRad) * (this->hDim / 2) );
+			glVertex2f(cos(degInRad) * (GetDimensionW() / 2),
+			           sin(degInRad) * (GetDimensionH() / 2));
 		}
 	glEnd();
 	glLoadIdentity();

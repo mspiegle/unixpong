@@ -102,6 +102,14 @@ void Widget::SetVelocityX(int x) {
 	this->vel_x = x;
 }
 
+int Widget::GetVelocityY() {
+	return this->vel_y;
+}
+
+int Widget::GetVelocityX() {
+	return this->vel_x;
+}
+
 void Widget::SetVelocityY(int y) {
 	this->vel_y = y;
 }
@@ -112,6 +120,14 @@ int Widget::GetDimensionW() {
 
 int Widget::GetDimensionH() {
 	return this->dim_h;
+}
+
+void Widget::SetDimensionW(int w) {
+	this->dim_w = w;
+}
+
+void Widget::SetDimensionH(int h) {
+	this->dim_h = h;
 }
 
 void Widget::AddCollision(Widget* Widget) {

@@ -27,18 +27,19 @@ class Widget {
 		virtual int GetTopEdge();
 		virtual int GetBottomEdge();
 		
-		int GetDimensionW();
-		int GetDimensionH();
-		
 		void SetPositionX(int x);
 		void SetPositionY(int y);
 		void SetVelocityX(int x);
 		void SetVelocityY(int y);
+		void SetDimensionW(int w);
+		void SetDimensionH(int h);
 
 		int GetPositionX();
 		int GetPositionY();
 		int GetVelocityX();
 		int GetVelocityY();
+		int GetDimensionW();
+		int GetDimensionH();
 
 		void AddCollision(Widget*);
 		void DelCollision(Widget*);
